@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 export default function Header(){
     return (
         
@@ -14,9 +16,9 @@ export default function Header(){
             </nav>
 
             <div className="auth-links">
-            <a href="/register">Register</a>
-            <a href="/login">Login</a>
-            <a href="#">Logout</a>
+            <Link to="/register">Register</Link>
+            <Link to="/login">Login</Link>
+            <Link to="#">Logout</Link>
             </div>
         </div>
         </header>
