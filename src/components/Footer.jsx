@@ -1,8 +1,8 @@
 export default function Footer(){
     return(
-        <footer class="footer">
+        <footer className="footer">
 
-        <div class="container footer-content">
+        <div className="container footer-content">
 
             <div>
             <h3>T-Shirt Store</h3>

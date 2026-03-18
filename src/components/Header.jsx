@@ -1,19 +1,19 @@
 export default function Header(){
     return (
         
-        <header class="header">
-        <div class="container nav">
-            <div class="logo">T-Shirt Store</div>
+        <header className="header">
+        <div className="container nav">
+            <div className="logo">T-Shirt Store</div>
 
             <nav>
-            <ul class="nav-links">
+            <ul className="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="#">Shop</a></li>
                 <li><a href="#">My Account</a></li>
             </ul>
             </nav>
 
-            <div class="auth-links">
+            <div className="auth-links">
             <a href="/register">Register</a>
             <a href="/login">Login</a>
             <a href="#">Logout</a>
