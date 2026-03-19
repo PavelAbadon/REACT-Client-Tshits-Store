@@ -13,8 +13,8 @@ export default function Home(){
         })();
     },[]);
 
-    // това тук е само да видя дали мога да взема тениските по този начин по който си мисля
-    //const featuredTShirts = 
+    // това тук е само да видя дали мога да взема тениските по този начин по който си мисля. Мога сега трябва да измисля признак по който да се показват препоръчаните тениски
+    const featuredTShirts = tshirts
 
     return(
         <>
@@ -30,7 +30,7 @@ export default function Home(){
         <h2>Featured T-Shirts</h2>
 
         <div className="product-grid">
-            {tshirts.map(tshirt => (<TshirtCard key={tshirt._id} {...tshirt } /> ))}
+            {featuredTShirts.map(tshirt => (<TshirtCard key={tshirt._id} {...tshirt } /> ))}
         </div>
         </section>
 
