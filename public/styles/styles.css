@@ -110,3 +110,54 @@ margin-top:60px;
 display:flex;
 justify-content:space-between;
 }
+.admin{
+padding:60px;
+}
+
+.admin-form{
+background:white;
+padding:20px;
+margin-bottom:40px;
+border-radius:10px;
+}
+
+.admin-form form{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.admin-list table{
+width:100%;
+background:white;
+border-collapse:collapse;
+}
+
+.admin-list th,
+.admin-list td{
+padding:10px;
+border-bottom:1px solid #ddd;
+text-align:left;
+}
+
+.admin-list img{
+width:60px;
+}
+
+button{
+cursor:pointer;
+}
+
+.edit-btn{
+background:#3498db;
+color:white;
+border:none;
+padding:5px 10px;
+}
+
+.delete-btn{
+background:#e74c3c;
+color:white;
+border:none;
+padding:5px 10px;
+}

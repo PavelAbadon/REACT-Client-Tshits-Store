@@ -19,6 +19,7 @@ export default function Header(){
             <Link to="/register">Register</Link>
             <Link to="/login">Login</Link>
             <Link to="#">Logout</Link>
+            <Link to="/adminPanel">Admin</Link>
             </div>
         </div>
         </header>

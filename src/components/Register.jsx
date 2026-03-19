@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function Register(){
+    const navigate = useNavigate();
+    
     const [registerData, setRegisterData] = useState({
         username: 'John Dow',
         email: 'email@example.com',
@@ -50,9 +53,10 @@ export default function Register(){
             }
 
             console.log('Успешна регистрация:', data);
+            navigate('/');
 
             // Запазване в LocaleStorage
-            localStorage.setItem('auth', JSON.stringify(data));
+            //localStorage.setItem('auth', JSON.stringify(data));
 
         } catch (error) {
             alert(error.message);
