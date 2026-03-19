@@ -1,4 +1,21 @@
+import { useEffect, useState } from "react";
+import TshirtCard from "./TshirtCard";
+
 export default function Home(){
+    const [tshirts, setTshirts] = useState([]);
+
+    //Get all tshirts 
+    useEffect(() =>{
+        (async ()=>{
+            const response = await fetch('http://localhost:3030/data/catalog');
+            const result = await response.json();
+            setTshirts(Object.values(result));
+        })();
+    },[]);
+
+    // това тук е само да видя дали мога да взема тениските по този начин по който си мисля
+    //const featuredTShirts = 
+
     return(
         <>
         <section className="hero">
@@ -13,28 +30,7 @@ export default function Home(){
         <h2>Featured T-Shirts</h2>
 
         <div className="product-grid">
-
-            <div className="card">
-            <img src="images/shirt1.jpg"/>
-            <h3>JavaScript Ninja</h3>
-            <p>$29.99</p>
-            <button>Add to Cart</button>
-            </div>
-
-            <div className="card">
-            <img src="images/shirt2.jpg"/>
-            <h3>Code Mode</h3>
-            <p>$24.99</p>
-            <button>Add to Cart</button>
-            </div>
-
-            <div className="card">
-            <img src="images/shirt3.jpg"/>
-            <h3>Bug Hunter</h3>
-            <p>$26.99</p>
-            <button>Add to Cart</button>
-            </div>
-
+            {tshirts.map(tshirt => (<TshirtCard key={tshirt._id} {...tshirt } /> ))}
         </div>
         </section>
 
