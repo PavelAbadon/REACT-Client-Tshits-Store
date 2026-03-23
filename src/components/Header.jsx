@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router";
+import UserContext from "../contexts/UserContext";
 
 export default function Header(){
+    const {isAuthenticated, user, onLogout} = useContext(UserContext);
+
     return (
         
         <header className="header">
@@ -16,10 +20,20 @@ export default function Header(){
             </nav>
 
             <div className="auth-links">
-            <Link to="/register">Register</Link>
-            <Link to="/login">Login</Link>
-            <Link to="#">Logout</Link>
-            <Link to="/adminPanel">Admin</Link>
+                {!isAuthenticated 
+                ?
+                <>
+                    <Link to="/register">Register</Link>
+                    <Link to="/login">Login</Link>
+                </>
+                :
+                <>
+                <button onClick={onLogout}>Logout</button>
+                <p>{user.username}</p>
+                <Link to="/adminPanel">Admin</Link>
+                </>
+                }          
+            
             </div>
         </div>
         </header>
