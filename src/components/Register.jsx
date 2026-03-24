@@ -34,7 +34,6 @@ export default function Register(){
                 throw new Error(data.message);
             }
 
-            // 🔥 запис в context + localStorage
             onRegister(data);
 
             navigate('/');
