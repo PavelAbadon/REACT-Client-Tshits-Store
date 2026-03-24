@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import UserContext from "../contexts/UserContext";
 
 export default function Header(){
-    const {isAuthenticated, user, onLogout} = useContext(UserContext);
+    const {isAuthenticated, user, onLogout, isAdmin} = useContext(UserContext);
 
     return (
         
@@ -30,11 +30,17 @@ export default function Header(){
                 <>
                 <button onClick={onLogout}>Logout</button>
                 <p>{user.username}</p>
-                <Link to="/adminPanel">Admin</Link>
+                {isAdmin && (
+                            <Link to="/adminPanel" className="admin-link">
+                                Admin Panel
+                            </Link>
+                        )}
+                
                 </>
                 }          
             
             </div>
+            
         </div>
         </header>
         

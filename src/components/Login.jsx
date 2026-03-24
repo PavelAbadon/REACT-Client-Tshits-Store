@@ -19,9 +19,13 @@ export default function Login(){
                 body: JSON.stringify({username, password}),
             });
 
+            
         const result = await response.json();
-        //console.log(result);
-        
+        console.log(result);
+        if (!response.ok) {
+            throw new Error(result.message);
+        }
+                
         onLogin(result);
         navigate('/');
 

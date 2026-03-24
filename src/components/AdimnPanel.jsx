@@ -2,7 +2,7 @@ export default function AdminPanel() {
   return (
     <section className="admin">
       <h1>Admin Dashboard</h1>
-      !-- CREATE PRODUCT --
+      
       <div className="admin-form">
         <h2>Create Product</h2>
 
@@ -15,7 +15,7 @@ export default function AdminPanel() {
           <button>Create</button>
         </form>
       </div>
-      !-- PRODUCTS LIST --
+      
       <div className="admin-list">
         <h2>All Products</h2>
 
@@ -29,7 +29,7 @@ export default function AdminPanel() {
             </tr>
           </thead>
 
-          <tbody id="products-table">тук ще има нещо динамично</tbody>
+          <tbody id="products-table">{/* тук ще се рендерират редовете динамично */}</tbody>
         </table>
       </div>
     </section>
