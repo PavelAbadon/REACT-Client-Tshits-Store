@@ -19,6 +19,13 @@ export const UserProvider = ({ children }) => {
         
     };
 
+    // Логика за register
+    const onRegister = (userData) => {
+        setUser(userData); // записва в state
+        localStorage.setItem('auth', JSON.stringify(userData)); // записва в localStorage
+        
+    };
+
     // Логика за logout
     const onLogout = () => {
         setUser(null); // чисти state
@@ -35,6 +42,7 @@ export const UserProvider = ({ children }) => {
             user,
             onLogin,
             onLogout,
+            onRegister,
             isAuthenticated,
             isAdmin
         }}>

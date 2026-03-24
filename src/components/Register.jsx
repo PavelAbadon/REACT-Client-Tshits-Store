@@ -1,93 +1,99 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router";
+import UserContext from "../contexts/UserContext";
+import useForm from "../hooks/useForm";
 
 export default function Register(){
     const navigate = useNavigate();
-    
-    const [registerData, setRegisterData] = useState({
-        username: 'John Dow',
-        email: 'email@example.com',
-        password: '******',
-        confirmPassword: '******',
-        
-    }) ;
+    const { onRegister } = useContext(UserContext);
 
-    const registerFormHandler = (e) => {
-        
-        setRegisterData((state) =>({
-            ...state,
-            [e.target.name]: e.target.value,
-        }));
+    const registerHandler = async (values) => {
+        const { username, email, password, confirmPassword } = values;
 
-        //console.log(registerData); // временно да видим данните
-    };
-
-    const submitHandler = async (e) => {
-        e.preventDefault();
-
-        // Validation password
-        if (registerData.password !== registerData.confirmPassword) {
+        // validation
+        if (password !== confirmPassword) {
             return alert('Passwords do not match');
         }
 
-        // API call
         try {
-            
             const response = await fetch('http://localhost:3030/users/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    username: registerData.username,
-                    email: registerData.email,
-                    password: registerData.password,
+                    username,
+                    email,
+                    password,
                 }),
             });
 
             const data = await response.json();
 
-            // проверка за грешка
             if (!response.ok) {
                 throw new Error(data.message);
             }
 
-            console.log('Успешна регистрация:', data);
-            navigate('/');
+            // 🔥 запис в context + localStorage
+            onRegister(data);
 
-            // Запазване в LocaleStorage
-            //localStorage.setItem('auth', JSON.stringify(data));
+            navigate('/');
 
         } catch (error) {
             alert(error.message);
         }
     };
-    
-    
+
+    const { values, changeHandler, submitHandler } = useForm({
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+    }, registerHandler);
+
     return(
         <section className="auth">
 
-        <h2>Register</h2>
+            <h2>Register</h2>
 
             <form onSubmit={submitHandler}>
 
-            <label>Username</label>
-            <input value={registerData.username} id="username" name="username" onChange={registerFormHandler} type="text"/>
+                <label>Username</label>
+                <input 
+                    name="username"
+                    value={values.username}
+                    onChange={changeHandler}
+                    type="text"
+                />
 
-            <label>Email</label>
-            <input value={registerData.email} id="email" name="email" onChange={registerFormHandler} type="email"/>
+                <label>Email</label>
+                <input 
+                    name="email"
+                    value={values.email}
+                    onChange={changeHandler}
+                    type="email"
+                />
 
-            <label>Password</label>
-            <input value={registerData.password} id="password" name="password" onChange={registerFormHandler} type="password"/>
+                <label>Password</label>
+                <input 
+                    name="password"
+                    value={values.password}
+                    onChange={changeHandler}
+                    type="password"
+                />
 
-            <label>Repeat Password</label>
-            <input value={registerData.confirmPassword} id="confirmPassword" name="confirmPassword" onChange={registerFormHandler} type="password"/>
+                <label>Repeat Password</label>
+                <input 
+                    name="confirmPassword"
+                    value={values.confirmPassword}
+                    onChange={changeHandler}
+                    type="password"
+                />
 
-            <button type="submit">Create Account</button>
+                <button type="submit">Create Account</button>
 
             </form>
 
         </section>
-
     );
 }
