@@ -1,14 +1,19 @@
 import { useState, useEffect} from "react";
+import AdminProductCreateEdit from "./AdminProductCreateEdit";
 
 export default function AdminPanel() {
-  const [tShirts, setTshirts] = useState([]);
+    const [tShirts, setTshirts] = useState([]);
+    //
+    const [showForm, setShowForm] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
     // GET всички тениски при първоначално зареждане
   useEffect(() => {
     const allTshirts = async () => {
       try {
-        const res = await fetch("http://localhost:3030/data/catalog"); 
-        const data = await res.json();
-        setTshirts(data);
+        const resposne = await fetch("http://localhost:3030/data/catalog"); 
+        const result = await resposne.json();
+        setTshirts(result);
       } catch (err) {
         console.error("Failed to fetch products:", err);
       }
@@ -20,6 +25,15 @@ export default function AdminPanel() {
   return (
     <section className="admin">
       <h1>Admin Dashboard</h1>
+        <button
+            className="btn-add"
+            onClick={() => {
+                setSelectedProduct(null); 
+                setShowForm(true);
+            }}
+            >
+            Add New T-Shirt
+        </button>
 
       <div className="admin-list">
         <h2>All Products</h2>
@@ -56,6 +70,12 @@ export default function AdminPanel() {
           </tbody>
         </table>
       </div>
+      {showForm && (
+        <AdminProductCreateEdit
+            product={selectedProduct}
+            onCancel={() => setShowForm(false)}
+        />
+        )}
     </section>
   );
 }
